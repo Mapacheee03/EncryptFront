@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CryptoService {
-  private baseUrl = 'https://encryptback.onrender.com/api/crypto';
+  private baseUrl = 'http://localhost:8080/api/crypto';
 
   constructor(private http: HttpClient) {}
 

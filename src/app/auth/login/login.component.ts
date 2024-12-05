@@ -8,14 +8,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  username = ''; // Nombre de usuario ingresado
-  password = ''; // Contraseña ingresada
-  errorMessage = ''; // Mensaje de error si el login falla
+  username = '';
+  password = '';
+  errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
-    // Validar manualmente el username antes de enviar
     if (!/^[a-zA-Z0-9]+$/.test(this.username)) {
       this.errorMessage = 'El nombre de usuario no debe contener caracteres especiales.';
       return;
@@ -23,14 +22,13 @@ export class LoginComponent {
 
     this.authService.login(this.username, this.password).subscribe({
       next: (res) => {
-        // Almacena el token en el almacenamiento local
-        localStorage.setItem('token', res.token);
+        // Guarda el token en sessionStorage
+        sessionStorage.setItem('token', res.token);
 
-        // Redirige al usuario a la ruta protegida
+        // Redirige al usuario
         this.router.navigate(['/encrypt']);
       },
       error: (err) => {
-        // Verifica si el error está relacionado con la contraseña incorrecta
         if (err.error?.message === 'Incorrect password') {
           this.errorMessage = 'Contraseña incorrecta. Intenta de nuevo.';
         } else {
@@ -42,19 +40,18 @@ export class LoginComponent {
 
   validateUsername(event: KeyboardEvent) {
     const regex = /^[a-zA-Z0-9]*$/;
-    const inputChar = event.key;
-    if (!regex.test(inputChar)) {
-      event.preventDefault(); // Bloquea la entrada del carácter no permitido
+    if (!regex.test(event.key)) {
+      event.preventDefault();
     }
   }
+
   validatePassword(event: KeyboardEvent) {
     const regex = /^[a-zA-Z0-9]*$/;
-    const inputChar = event.key;
-    if (!regex.test(inputChar)) {
-      event.preventDefault(); // Bloquea la entrada del carácter no permitido
+    if (!regex.test(event.key)) {
+      event.preventDefault();
     }
   }
-  // Navega al formulario de registro
+
   goToRegister() {
     this.router.navigate(['/register']);
   }
