@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private baseUrl = 'http://localhost:8080/api/auth'; // URL de la API
+  private baseUrl = 'https://encryptback.onrender.com/api/auth'; // URL de la API
 
   constructor(private http: HttpClient, private router: Router) {}
 
