@@ -10,6 +10,7 @@
           type="text"
           pattern="^[a-zA-Z0-9]+$"
           (keypress)="validateUsername($event)"
+          maxlength="10"
           required
           placeholder="Identificador de Usuario"
           #usernameInput="ngModel"

@@ -1,3 +1,4 @@
+/* Base styles */
 html, body {
   margin: 0;
   padding: 0;
@@ -5,30 +6,37 @@ html, body {
   height: 100%;
   min-height: 100vh;
   background: #0a192f;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .container {
   background-color: #0a192f;
-  height: 100vh;
-  width: 100vw;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .encryption-container {
   background: rgba(16, 32, 57, 0.95);
-  padding: 2.5rem;
-  width: 100%;
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  width: 90%;
   border: 1px solid #1a3c6e;
   box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
   position: relative;
   z-index: 1;
   max-width: 500px;
-  margin: 20vh auto;
+  margin: 0 auto;
   border-radius: 8px;
+  box-sizing: border-box;
 }
 
 .encryption-container h2 {
-  font-size: 1.8rem;
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
   margin-bottom: 15px;
   color: #64ffda;
   font-family: Arial, Helvetica, sans-serif;
@@ -37,12 +45,13 @@ html, body {
 
 .input-container {
   margin-bottom: 20px;
+  width: 100%;
 }
 
 .input-label {
   display: block;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   margin-bottom: 5px;
   color: #ffffff;
 }
@@ -53,11 +62,19 @@ html, body {
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 10px;
-  font-size: 1rem;
-  resize: none;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
   transition: border-color 0.3s;
   background-color: #1a2b3d;
   color: #fff;
+  box-sizing: border-box;
+}
+
+.input-text {
+  min-height: auto;
+  height: 40px;
 }
 
 .input-textarea:focus, 
@@ -68,9 +85,11 @@ html, body {
 
 .button-group {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 15px;
+  width: 100%;
 }
 
 .decrypt-button {
@@ -79,9 +98,12 @@ html, body {
   border: none;
   border-radius: 6px;
   padding: 10px 20px;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   cursor: pointer;
   transition: background-color 0.3s;
+  min-width: 120px;
+  flex: 1;
+  max-width: 200px;
 }
 
 .decrypt-button:hover {
@@ -95,15 +117,53 @@ html, body {
 
 .result-text {
   margin-top: 20px;
-  font-size: 1.1rem;
+  font-size: clamp(0.875rem, 2vw, 1.1rem);
   color: #e9ecef;
   background: #1a2b3d;
   padding: 10px;
   border-radius: 6px;
   word-wrap: break-word;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 p {
   overflow-wrap: break-word;
   color: #ffffff;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  line-height: 1.5;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .container {
+      padding: 15px;
+  }
+  
+  .encryption-container {
+      width: 95%;
+      margin: 10px auto;
+  }
+  
+  .button-group {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .decrypt-button {
+      width: 100%;
+      max-width: none;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .input-textarea,
+  .input-text {
+      font-size: 16px; /* Prevents zoom on iOS */
+  }
+  
+  .decrypt-button {
+      padding: 12px 20px; /* Larger touch targets */
+  }
 }

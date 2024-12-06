@@ -1,10 +1,12 @@
+/* Base styles */
 html, body {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
   background: #0a192f;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .container {
@@ -12,14 +14,15 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 .intro-container, .encryption-container {
   background: rgba(16, 32, 57, 0.9);
   padding: 20px;
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   border-radius: 8px;
   margin: 10px 0;
@@ -28,7 +31,7 @@ html, body {
 }
 
 .intro-container h2, .encryption-container h2 {
-  font-size: 1.6rem;
+  font-size: clamp(1.2rem, 4vw, 1.6rem);
   font-family: Arial, Helvetica, sans-serif;
   color: #64ffda;
   text-align: center;
@@ -37,41 +40,30 @@ html, body {
 
 .intro-container p, .encryption-container p {
   color: #e9ecef;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   margin-bottom: 10px;
+  line-height: 1.5;
 }
 
 .Logout {
-  position: absolute;
+  position: fixed;
   top: 20px;
   right: 20px;
-  font-size: 1rem;
+  font-size: clamp(0.875rem, 2vw, 1rem);
   border: none;
   border-radius: 6px;
-  padding: 10px 20px;
+  padding: 8px 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-.Logout:hover {
-  background-color: #0056b3;
+  z-index: 1000;
 }
 
 button {
   cursor: pointer;
-  font-size: 1rem;
-  padding: 10px 20px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  padding: 8px 16px;
   border-radius: 6px;
   transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #0056b3;
-  color: white;
-}
-
-button[aria-label="Encrypt text"]:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
 }
 
 .input-container {
@@ -84,22 +76,22 @@ button[aria-label="Encrypt text"]:disabled {
   border: 1px solid #ccc;
   border-radius: 6px;
   padding: 10px;
-  font-size: 1rem;
-  resize: none;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
   background-color: #1a2b3d;
   color: #fff;
-}
-
-.input-textarea:focus {
-  border-color: #007bff;
-  outline: none;
+  box-sizing: border-box;
 }
 
 .button-group {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-wrap: wrap;
   gap: 10px;
   margin-top: 15px;
+  width: 100%;
 }
 
 .encrypt-button, .decrypt-button {
@@ -107,29 +99,62 @@ button[aria-label="Encrypt text"]:disabled {
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 10px 20px;
-  font-size: 1rem;
-}
-
-.encrypt-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.decrypt-button:hover, .encrypt-button:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-p{
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 8px 16px;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  flex: 1;
+  min-width: 120px;
+  max-width: 200px;
 }
 
 .result-text {
   margin-top: 20px;
-  font-size: 1.1rem;
+  font-size: clamp(0.875rem, 2vw, 1.1rem);
   color: #e9ecef;
   background: #1a2b3d;
   padding: 10px;
   border-radius: 6px;
   word-wrap: break-word;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+  .container {
+      padding: 15px;
+  }
+  
+  .intro-container, .encryption-container {
+      width: 95%;
+      padding: 15px;
+  }
+  
+  .Logout {
+      top: 10px;
+      right: 10px;
+      padding: 6px 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .button-group {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  .encrypt-button, .decrypt-button {
+      width: 100%;
+      max-width: none;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+  .input-textarea {
+      font-size: 16px; 
+  }
+  
+  button {
+      padding: 12px 20px; /* Larger touch targets */
+  }
 }

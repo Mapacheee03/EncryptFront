@@ -12,7 +12,7 @@ export class EncryptComponent {
   Iv = '';
 
   constructor(private cryptoService: CryptoService,private authService: AuthService) {}
-
+  
   encrypt() {
     this.cryptoService.encrypt(this.plaintext).subscribe({
       next: (res) => {

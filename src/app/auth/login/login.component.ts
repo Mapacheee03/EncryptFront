@@ -14,6 +14,16 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {
+    if (this.authService.isLoggedIn()) {
+      console.log('Usuario autenticado, redirigiendo a /encrypt');
+      this.router.navigate(['/encrypt']);
+      window.addEventListener('beforeunload', () => {
+        sessionStorage.clear(); // Limpia el sessionStorage al cerrar la pestaña
+      });
+    } 
+  }
+  
   login() {
     if (!/^[a-zA-Z0-9]+$/.test(this.username)) {
       this.errorMessage = 'El nombre de usuario no debe contener caracteres especiales.';
